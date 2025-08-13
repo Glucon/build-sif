@@ -1,0 +1,44 @@
+Bootstrap: docker-archive
+From: ./debian12.11.tar
+
+%labels
+    Maintainer yangys
+    App lammps 22Jul2025 in debian 12.11
+
+%files
+    ./lammps-src-22Jul2025.tar.gz /opt
+
+%post
+    sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
+    sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
+
+    apt-get update && apt-get install -y \
+        build-essential \
+	libopenmpi-dev \
+	cmake \
+	libfftw3-dev \
+	libpng-dev \
+	python3 \
+        && rm -rf /var/lib/apt/lists/*
+
+    tar -xf /opt/lammps-src-22Jul2025.tar.gz -C /opt
+    rm -rf /opt/lammps-src-22Jul2025.tar.gz
+
+    cd /opt/lammps-22Jul2025
+    mkdir -p /opt/lammps-22Jul2025/build 
+    cd /opt/lammps-22Jul2025/build 
+    cmake ../cmake -DPKG_REAXFF=ON -DPKG_MANYBODY=ON -DPKG_KSPACE=ON -DPKG_MOLECULE=ON -DBUILD_MPI=ON
+    make -j$(nproc)
+    make install
+    rm -rf /opt/lammps-22Jul2025
+
+%environment
+    # from /root/.local/etc
+    # export MSI2LMP_LIBRARY=${MSI2LMP_LIBRARY-share/lammps/frc_files
+    export LAMMPS_POTENTIALS=/root/.local/share/lammps/potentials
+    export PATH=$PATH:/root/.local/bin
+    export OMPI_ALLOW_RUN_AS_ROOT=1
+    export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
+%runscript
+    exec lmp "$@"

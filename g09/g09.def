@@ -1,0 +1,40 @@
+Bootstrap: docker-archive
+From: ./debian12.11.tar
+
+%labels
+    Maintainer yangys
+    App Gaussian 09E in debian 12.11
+
+%files
+    ./g09E_no_tests.tar.bz2 /opt
+
+%post
+    sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
+    sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
+
+    apt-get update && apt-get install -y --no-install-recommends \
+        lbzip2
+
+    tar -xf /opt/g09E_no_tests.tar.bz2 -C /opt
+    chmod -R 750 /opt/g09
+    chown -R root:users /opt/g09
+    rm -rf /opt/g09E_no_tests.tar.bz2
+
+    apt-get purge -y \
+    lbzip2
+
+    apt-get autoremove -y
+    apt-get clean
+    rm -rf /var/lib/apt/lists/* /root/.cache
+
+%environment
+    export g09root=/opt
+
+%runscript
+    exec /bin/bash -lc '
+      source /opt/g09/bsd/g09.profile
+      if [[ "$1" == "g09" ]]; then
+        shift
+      fi
+      exec g09 "$@"
+    ' dummy "$@"
