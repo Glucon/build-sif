@@ -10,3 +10,5 @@ orca601/orca_6_0_1_linux_x86-64_shared_openmpi416_avx2.tar.xz
 orca610/orca_6_1_0_linux_x86-64_shared_openmpi418_avx2.tar.xz
 vasp642/potentials.zip
 vasp642/vasp.6.4.2.tgz
+xtb-crest-edge/xtb-bleed.tar.xz
+xtb-crest-edge/crest-intel-2023.1.0-ubuntu-latest.tar.xz

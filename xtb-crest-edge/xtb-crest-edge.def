@@ -1,0 +1,40 @@
+Bootstrap: docker-archive
+From: ./debian12.11.tar
+
+%labels
+    Maintainer yangys
+    App XTB 2025/08/01 and CREST 2025/07/28 in debian 12.11
+
+%files
+    ./xtb-bleed.tar.xz /opt
+    ./crest-intel-2023.1.0-ubuntu-latest.tar.xz /opt
+
+%post
+    set -e
+    sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
+    sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
+
+    apt-get update && apt-get install -y --no-install-recommends \
+	xz-utils
+
+    tar -xf /opt/xtb-bleed.tar.xz -C /opt
+    tar -xf /opt/crest-intel-2023.1.0-ubuntu-latest.tar.xz -C /opt
+    rm -f /opt/xtb-bleed.tar.xz
+    rm -f /opt/crest-intel-2023.1.0-ubuntu-latest.tar.xz
+
+    echo "/opt/xtb-bleed/lib" > /etc/ld.so.conf.d/xtb-bleed.conf
+    ldconfig
+
+    apt-get purge -y \
+    xz-utils
+
+    apt-get autoremove -y
+    apt-get clean
+    rm -rf /var/lib/apt/lists/* /root/.cache
+
+%environment
+    export PATH=$PATH:/opt/crest
+    export PATH=$PATH:/opt/xtb-bleed/bin
+
+%runscript
+    exec xtb "$@"
