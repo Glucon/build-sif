@@ -1,6 +1,7 @@
 **/debian*
 **/OfakeG*
 **/openmpi*
+**/*.sif
 g09/g09E_no_tests.tar.bz2
 g16/g16C02_no_tests.tar.bz2
 lammps22Jul2025/lammps-src-22Jul2025.tar.gz
