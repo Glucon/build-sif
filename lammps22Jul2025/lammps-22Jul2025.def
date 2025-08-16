@@ -31,7 +31,6 @@ Stage: build
     export PATH=/opt/venv/bin:$PATH
 
     tar -xf /opt/lammps-src-22Jul2025.tar.gz -C /opt
-    rm -rf /opt/lammps-src-22Jul2025.tar.gz
 
     mkdir -p /opt/lammps
     mkdir -p /opt/lammps-22Jul2025/build 
