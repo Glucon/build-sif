@@ -26,7 +26,6 @@ Stage: build
         rsync
 
     tar -xf /opt/vasp.6.4.2.tgz -C /opt
-    rm -rf /opt/vasp.6.4.2.tgz
     cp /opt/vasp.6.4.2/arch/makefile.include.gnu_ompi_aocl_omp /opt/vasp.6.4.2/makefile.include
 
     sed -i -E \
@@ -53,7 +52,7 @@ Stage: build
     sed -i -E \
     '/^#INCS[[:space:]]+\+=[[:space:]]+-I\$\((AMDFFTW_ROOT)\)\/include/a LLIBS      += -L/usr/lib/x86_64-linux-gnu -lfftw3 -lfftw3_omp -lfftw3_mpi' \
     /opt/vasp.6.4.2/makefile.include
-    cd /opt/vasp.6.4.2 && make all # -j"$(nproc)" failed
+    cd /opt/vasp.6.4.2 && make all # -j"$(nproc)" failed for Fortran
 
 # ---------- Stage 2: final runtime image ----------
 Bootstrap: docker-archive
