@@ -9,13 +9,16 @@ From: ./debian12.11.tar
     sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
     sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
 
-    apt-get update && apt-get install -y \
-        lammps \
-        && rm -rf /var/lib/apt/lists/*
+    apt-get update && apt-get install -y lammps
+
+    apt-get autoremove -y
+    apt-get clean
+    rm -rf /var/lib/apt/lists/* /root/.cache
 
 %environment
     export OMPI_ALLOW_RUN_AS_ROOT=1
     export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+    export OMP_NUM_THREADS=1 # mpi priority
 
 %runscript
     exec lmp "$@"
