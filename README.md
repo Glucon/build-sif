@@ -11,6 +11,7 @@ orca601/
 orca610/
 vasp642/
 lammps22Jul2025/
+lammps-apt
 molpro202420/
 ```
 
