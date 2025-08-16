@@ -21,7 +21,6 @@ Stage: build
 
     cd /opt
     tar -xf /opt/openmpi-4.1.8.tar.bz2
-    rm -f /opt/openmpi-4.1.8.tar.bz2
 
     cd /opt/openmpi-4.1.8
     ./configure --prefix=/opt/openmpi418 --disable-static
