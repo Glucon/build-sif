@@ -74,7 +74,6 @@ Stage: runtime
         libfftw3-double3 \
 	libpng16-16 \
 	libjpeg62-turbo \
-	lammps-data \
 	openkim-models \
 	python3 \
 	libpython3.11 \
@@ -92,7 +91,7 @@ Stage: runtime
     rm -rf /var/lib/apt/lists/* /root/.cache
 
 %environment
-    export LAMMPS_POTENTIALS=/usr/share/lammps/potentials
+    export LAMMPS_POTENTIALS=/opt/lammps/share/lammps/potentials
     export PATH=/opt/venv/bin:$PATH
     export PATH=$PATH:/opt/lammps/bin
     export OMP_NUM_THREADS=1 # mpi priority
