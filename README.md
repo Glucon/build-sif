@@ -10,6 +10,7 @@ g16/
 orca601/
 orca610/
 vasp642/
+vasp642-intel/
 lammps22Jul2025/
 lammps-apt/
 molpro202420/
