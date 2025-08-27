@@ -14,6 +14,7 @@ vasp642-intel/
 lammps22Jul2025/
 lammps-apt/
 molpro202420/
+cp2k-apt/
 ```
 
 ## Usage
