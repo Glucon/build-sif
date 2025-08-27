@@ -25,10 +25,10 @@ Navigate to the desired application directory:
 cd [directory_name]
 ```
 
-Run the build script:
+Run the build script (need `sudo` or `root`):
 
 ```bash
-bash build.sh
+./build.sh
 ```
 
 ## License
