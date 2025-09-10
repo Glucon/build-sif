@@ -11,13 +11,12 @@ Stage: build
     ./vasp.6.4.2.tgz /opt
 
 %post
-    set -e
     sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
     sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
 
     apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
-	gfortran \
+        gfortran \
         libopenmpi-dev \
         libopenblas-dev \
         libscalapack-openmpi-dev \
@@ -73,7 +72,6 @@ Stage: runtime
     /opt/vasp.6.4.2/bin /opt/vasp.6.4.2/bin
 
 %post
-    set -e
     sed -i 's|deb.debian.org|mirrors.cernet.edu.cn|g' /etc/apt/sources.list.d/debian.sources
     sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
 
