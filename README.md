@@ -16,6 +16,7 @@ lammps-apt/
 molpro202420/
 cp2k-apt/
 psi4-191/
+wannier90-310/
 ```
 
 ## Usage
