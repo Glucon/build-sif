@@ -69,16 +69,16 @@ Stage: runtime
     sed -i 's|security.debian.org/debian-security|mirrors.cernet.edu.cn/debian-security|g' /etc/apt/sources.list.d/debian.sources
 
     apt-get update && apt-get install -y --no-install-recommends \
-	libopenmpi3 \
-	openmpi-bin \
-        libfftw3-double3 \
-	libpng16-16 \
-	libjpeg62-turbo \
-	openkim-models \
-	python3 \
-	libpython3.11 \
-	python3-venv \
-	python3-pip
+      libopenmpi3 \
+      openmpi-bin \
+      libfftw3-double3 \
+      libpng16-16 \
+      libjpeg62-turbo \
+      openkim-models \
+      python3 \
+      libpython3.11 \
+      python3-venv \
+      python3-pip
 
     export PATH=/opt/venv/bin:$PATH
     /opt/venv/bin/pip install mpi4py -i https://mirrors.cernet.edu.cn/pypi/web/simple
